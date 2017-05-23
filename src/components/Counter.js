@@ -1,19 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addCount } from '../actions/IndexPage'
+import { addCount_saga, addCount_thunk, addCount_promise } from '../actions/IndexPage'
 
 class Counter extends Component {
   constructor(props){
     super(props)
     this.handleAdd=this.handleAdd.bind(this)
+    this.upload=this.upload.bind(this)
   }
   handleAdd(){
-    this.props.addCount(2)
+    // this.props.addCount_saga()
+    // this.props.addCount_thunk()
+    this.props.addCount_promise()
+  }
+  upload(){
+
   }
   render(){
-    const num = 2
     return (
-      <button onClick={this.handleAdd}>add {this.props.count} </button>
+      <div>
+        <button onClick={this.handleAdd}>add {this.props.count} </button>
+        <input type="file" onChange={this.upload} />
+      </div>
     )
   }
 }
@@ -26,5 +34,7 @@ function mapStateToProps (state, ownProps) {
 }
 
 export default connect(mapStateToProps,{
-  addCount,
+  addCount_saga,
+  addCount_thunk,
+  addCount_promise,
 })(Counter)
